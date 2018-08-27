@@ -14,12 +14,11 @@ export class CountryNamePipe implements PipeTransform {
     this.getCountries()
       .subscribe(
         (data: any) => {
+          // console.log(data);
            const country = data.filter((country) =>{
-            return country.id === id;
+            return country.id == id;
           })
           subject.next(country[0].name);
-          console.log(country[0]);
-          
         },
         (err: any) => {
           subject.error(err);

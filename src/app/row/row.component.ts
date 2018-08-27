@@ -39,7 +39,7 @@ export class RowComponent implements OnInit {
       .subscribe(
         (data: Player[]) => {
           this.players = data;
-          // console.dir(this.players);
+          console.dir(this.players);
         },
         (err: any) => {
           console.log(err);
@@ -51,10 +51,12 @@ export class RowComponent implements OnInit {
     this.router.navigate(['user/create']);
   }
 
-  editPlayer(id: number) {
-    this.router.navigate([`user/edit/${id}`]);
+  editPlayer(id: number, event) {
+    event.stopPropagation();
+    console.log('Edit');
+    
+    this.router.navigate([`user/detail/${id}`]);
     // this.playersService.editPlayerValues(this.id, this.players[this.id]);
-    // alert('Player Edited');
   }
 
   deletePlayerSelected(id: number) {
@@ -72,6 +74,11 @@ export class RowComponent implements OnInit {
   openVerticallyCentered(content, player) {
     this.selectedPlayer = player;
     this.modalService.open(content, { centered: true });
+  }
+
+  detailPlayer(id: number){
+    console.log(id);
+    this.router.navigate(['user/detail/:id']);
   }
 
 }

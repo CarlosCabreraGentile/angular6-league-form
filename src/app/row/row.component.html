@@ -6,7 +6,7 @@
         <button type="button" class="btn btn-warning" (click)="createPlayer()">Add player</button>
       </div>
       <hr>
-      <table class="table">
+      <table class="table table-hover">
         <thead class="thead-light">
           <tr>
             <th scope="col">#</th>
@@ -18,12 +18,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let player of players">
+          <tr *ngFor="let player of players" (click)="detailPlayer(player.id)">
             <td>{{ player.id }}</td>
             <td>{{ player.name }}</td>
             <td>{{ player.value }}</td>
             <td>{{ player.country | countryName | async }}</td>
-            <td><button type="button" class="btn btn-warning" (click)="editPlayer(player.id)">Edit</button></td>
+            <td><button type="button" class="btn btn-warning" (click)="editPlayer(player.id, $event)">Edit</button></td>
             <td><button type="button" class="btn btn-delete" (click)="openVerticallyCentered(content, player)"><i class="fa fa-trash-alt"></i></button></td>
           </tr>
         </tbody>

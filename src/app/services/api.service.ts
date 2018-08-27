@@ -139,8 +139,6 @@ export class ApiService {
 	httpPut(endpoint, dataPost, mockapi: boolean = false): Observable<any> {
 		const subject = new Subject<any>();
 		const json = JSON.stringify(dataPost);
-		console.log(json);
-		debugger
 		this.http.put(this.baseUrl + endpoint, json, { "headers": new Headers({ "Content-Type": "application/json" }) }) //, { headers: this.getHttpHeaders() })
 			.pipe(map((response: any) => response.json()))
 			.pipe(catchError(this.handleError))
@@ -151,7 +149,6 @@ export class ApiService {
 			);
 		return subject.asObservable();
 	}
-
 
 	/**
 	 * HTTP Delete

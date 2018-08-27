@@ -40,8 +40,8 @@ export class PlayersService {
     return subject.asObservable();
   }
 
-  public editPlayerValues(id, player) {
-    this.apiService.httpPut('/players/' + id, player);
+  public putPlayer(id, player) {
+    return this.apiService.httpPut('/players/' + id, player);
   }
 
   /**
@@ -49,7 +49,7 @@ export class PlayersService {
   * @param player 
   */ 
   public postPlayer(player) {
-    this.apiService.httpPostPlayer('/players', player);
+    return this.apiService.httpPostPlayer('/players', player);
   }
 
   public deletePlayer(id){

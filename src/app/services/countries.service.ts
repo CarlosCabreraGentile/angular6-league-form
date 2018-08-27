@@ -18,8 +18,8 @@ export class CountriesService {
         //   console.log(data);
         //   debugger
           // console.log(JSON.stringify(data))
-          const countries = HelperService.fromObjectToArray(data);
-          subject.next(countries);
+          // const countries = HelperService.fromObjectToArray(data);
+          subject.next(data);
         },
         (err: any) => {
           subject.error(err);

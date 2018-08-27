@@ -26,6 +26,20 @@ export class PlayersService {
     return subject.asObservable();
   }
 
+  public getPlayer(id) {
+    const subject = new Subject<any>();
+    this.apiService.httpGet(`/players/${id}`)
+      .subscribe(
+        (data: any) => {
+          subject.next(data);
+        },
+        (err: any) => {
+          subject.error(err);
+        }
+      )
+    return subject.asObservable();
+  }
+
   public editPlayerValues(id, player) {
     this.apiService.httpPut('/players/' + id, player);
   }

@@ -12,14 +12,16 @@ import { PlayersService } from './services/players.service';
 import { ApiService } from './services/api.service';
 import { RowComponent } from './row/row.component';
 import { DetailPlayerComponent } from './detail-player/detail-player.component';
-import { CreatePlayerComponent } from './create-player/create-player.component';
+import { FormPlayerComponent } from './form-player/form-player.component'; 
 import { ModalOptionsComponent } from './modal-options/modal-options.component';
+import { CountryNamePipe } from './pipes/country-name.pipe';
 
 const appRoutes: Routes = [
   { path: '', component: RowComponent },
   { path: 'home', component: RowComponent },
-  { path: 'details/:id', component: DetailPlayerComponent },
-  { path: 'create', component: CreatePlayerComponent/*, canActivate: [MyGuard]*/ },
+  { path: 'user/detail/:id', component: DetailPlayerComponent },
+  { path: 'user/create', component: FormPlayerComponent/*, canActivate: [MyGuard]*/ },
+  { path: 'user/edit/:id', component: FormPlayerComponent/*, canActivate: [MyGuard]*/ }
 ];
 
 @NgModule({
@@ -27,8 +29,9 @@ const appRoutes: Routes = [
     AppComponent,
     RowComponent,
     DetailPlayerComponent,
-    CreatePlayerComponent,
-    ModalOptionsComponent
+    FormPlayerComponent,
+    ModalOptionsComponent,
+    CountryNamePipe
   ],
   imports: [
     BrowserModule,

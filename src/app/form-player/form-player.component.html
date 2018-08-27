@@ -7,8 +7,11 @@
             <li class="breadcrumb-item">
               <a routerLink="/home" cursor="pointer">Home</a>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">
+            <li class="breadcrumb-item active" aria-current="page" *ngIf="!id">
               Create
+            </li>
+            <li class="breadcrumb-item active" aria-current="page" *ngIf="id">
+              Edit
             </li>
           </ol>
         </nav>
@@ -16,7 +19,7 @@
       <h3 class="add-center mt-3">
         Please enter player info
       </h3>
-      <form [formGroup]="form" (ngSubmit)="onSave()">
+      <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSave()">
         <div class="form-row mt-5">
           <div class="form-group col">
             <label for="inputEmail4">Name</label>
@@ -55,7 +58,7 @@
             <label for="inputEmail4">Country</label>
             <select class="custom-select d-block w-100" formControlName="country">
               <option>Choose...</option>
-              <option *ngFor="let country of countries">{{ country.name }}</option>
+              <option *ngFor="let country of countries" [value]="country.id">{{ country.name }}</option>
             </select>
           </div>
         </div>

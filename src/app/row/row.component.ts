@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 
-import Player from '../models/player.interface';
+import { Player } from '../models/player.interface';
 import { PlayersService } from '../services/players.service';
 
 
@@ -48,11 +48,11 @@ export class RowComponent implements OnInit {
   }
 
   createPlayer() {
-    this.router.navigate(['create']);
+    this.router.navigate(['user/create']);
   }
 
   editPlayer(id: number) {
-    this.router.navigate([`details/${id}`]);
+    this.router.navigate([`user/edit/${id}`]);
     // this.playersService.editPlayerValues(this.id, this.players[this.id]);
     // alert('Player Edited');
   }

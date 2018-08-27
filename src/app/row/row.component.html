@@ -24,11 +24,24 @@
             <td>{{ player.value }}</td>
             <td>{{ player.country }}</td>
             <td><button type="button" class="btn btn-warning" (click)="editPlayer(player.id)">Edit</button></td>
-            <td><button type="button" class="btn btn-delete"><i class="fa fa-trash-alt"></i></button></td>
+            <td><button type="button" class="btn btn-delete" (click)="openVerticallyCentered(content, player)"><i class="fa fa-trash-alt"></i></button></td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 </div>
-<app-modal-options></app-modal-options> 
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Delete Player</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure?&hellip;</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="deletePlayerSelected(selectedPlayer.id); d('Cross click')">Yes</button>
+  </div>
+</ng-template>

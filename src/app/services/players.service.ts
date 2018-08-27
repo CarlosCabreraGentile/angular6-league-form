@@ -35,9 +35,10 @@ export class PlayersService {
   * @param player 
   */ 
   public postPlayer(player) {
-    const subject = new Subject<any>();
     this.apiService.httpPostPlayer('/players', player);
+  }
 
-    // return subject.asObservable();
+  public deletePlayer(id){
+    return this.apiService.httpDelete(`/players/${id}`);
   }
 }

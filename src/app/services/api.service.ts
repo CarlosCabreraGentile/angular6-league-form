@@ -79,30 +79,7 @@ export class ApiService {
 			.pipe(catchError(this.handleError));
 	}
 
-	/**
-		 * HTTP Post
-		 * @param endpoint
-		 * @param dataPost
-		 * @returns {Observable<R>}
-		 */
-	httpPost(endpoint, dataPost, uploadFile = false): Observable<any> {
-		const subject = new Subject<any>();
-		let json = null;
-		if (dataPost) {
-			json = JSON.stringify(dataPost);
-		}
-		this.http.post(this.baseUrl + endpoint, json, { "headers": new Headers({ "Content-Type": "application/json" }) }) //, { headers: this.getHttpHeaders() })
-			.pipe(map((response: any) => response.json()))
-			.pipe(catchError(this.handleError))
-			.subscribe(
-				res => subject.next(res),
-				err => subject.error(err),
-				() => subject.complete()
-			);
-		return subject.asObservable();
-	}
-
-	/**
+/**
  * HTTP Post
  * @param endpoint
  * @param dataPost
@@ -162,6 +139,8 @@ export class ApiService {
 	httpPut(endpoint, dataPost, mockapi: boolean = false): Observable<any> {
 		const subject = new Subject<any>();
 		const json = JSON.stringify(dataPost);
+		console.log(json);
+		debugger
 		this.http.put(this.baseUrl + endpoint, json, { "headers": new Headers({ "Content-Type": "application/json" }) }) //, { headers: this.getHttpHeaders() })
 			.pipe(map((response: any) => response.json()))
 			.pipe(catchError(this.handleError))
@@ -176,14 +155,21 @@ export class ApiService {
 
 	/**
 	 * HTTP Delete
-	 * @param res
-	 * @param attempts
+	 * @param endpoint
+	 * @param dataPost
 	 * @returns {Observable<R>}
 	 */
-	httpDelete(res, mockapi: boolean = false): Observable<any> {
-		return this.http.delete(this.baseUrl + res) //, { headers: this.getHttpHeaders() })
+	httpDelete(endpoint, mockapi: boolean = false): Observable<any> {
+		const subject = new Subject<any>();
+		this.http.delete(this.baseUrl + endpoint) //, { headers: this.getHttpHeaders() })
 			.pipe(map((response: any) => response.json()))
-			.pipe(catchError(this.handleError));
+			.pipe(catchError(this.handleError))
+			.subscribe(
+				data => subject.next(data),
+				error => subject.error(error),
+				() => subject.complete()
+			);
+		return subject.asObservable()
 	}
 
 

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { HelperService } from './helper.service';
 import { Subject, Observable } from 'rxjs';
 import { Player } from '../models/player.interface';
 
@@ -40,7 +39,7 @@ export class PlayersService {
    * @param id id from player
    * @returns {Observable<Player>}
    */
-  public getPlayer(id): Observable<Player> { 
+  public getPlayer(id: number): Observable<Player> { 
     const subject = new Subject<any>();
     this.apiService.httpGet(`/players/${id}`)
       .subscribe(
@@ -60,13 +59,13 @@ export class PlayersService {
    * @param player 
    * @returns {Observable<Player>}
    */
-  public putPlayer(id, player):Observable<Player> {
+  public putPlayer(id: number, player: Player):Observable<Player> {
     return this.apiService.httpPut('/players/' + id, player);
   }
 
   /**
   * Create a new player
-  * @param player 
+  * @param player
   * @returns {Observable<Player>}
   */ 
   public postPlayer(player):Observable<Player> {
@@ -78,7 +77,7 @@ export class PlayersService {
    * @param id id from player
    * @returns {Observable<Player>}
    */
-  public deletePlayer(id):Observable<Player> {
+  public deletePlayer(id: number):Observable<Player> {
     return this.apiService.httpDelete(`/players/${id}`);
   }
 }

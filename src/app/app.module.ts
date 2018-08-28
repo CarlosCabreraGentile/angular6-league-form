@@ -6,7 +6,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
-
 import { AppComponent } from './app.component';
 import { PlayersService } from './services/players.service';
 import { ApiService } from './services/api.service';

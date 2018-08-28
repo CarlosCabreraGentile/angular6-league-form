@@ -13,19 +13,7 @@ import { forkJoin } from 'rxjs';
   selector: 'app-row',
   templateUrl: './row.component.html',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./row.component.css'],
-  styles: [`
-  .dark-modal .modal-content {
-    background-color: #292b2c;
-    color: white;
-  }
-  .dark-modal .close {
-    color: white;
-  }
-  .light-blue-backdrop {
-    background-color: #5cb3fd;
-  }
-`]
+  styleUrls: ['./row.component.css']
 })
 
 export class RowComponent implements OnInit {
@@ -79,7 +67,7 @@ export class RowComponent implements OnInit {
   deletePlayerSelected(id: number) {
     this.playersService.deletePlayer(id)
       .subscribe((data: Player) => {
-        this.players = this.players.filter((player) => {
+        this.players = this.players.filter((player) => { 
           return player.id !== data.id;
         })
       },

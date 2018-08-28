@@ -32,7 +32,7 @@ export class CountryNamePipe implements PipeTransform {
 
   public getCountries() {
     const subject = new Subject<any>();
-    this.apiService.httpGetCountriesList('/countries')
+    this.apiService.httpGet('/countries')
       .subscribe(
         (data: any) => {
           subject.next(data);

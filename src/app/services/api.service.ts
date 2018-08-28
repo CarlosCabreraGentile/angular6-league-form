@@ -12,10 +12,12 @@ export class ApiService {
 
 	private baseUrl: string;
 
-	constructor(private http: Http) {
-		this.baseUrl = environment.API_ENDPOINT;
-	}
+	constructor(private http: Http) { this.baseUrl = environment.API_ENDPOINT; }
 
+	/**
+	 * Get headers
+	 * @param uploadFile 
+	 */
 	getHttpHeaders(uploadFile: boolean = false) {
 		const headers = new Headers();
 
@@ -33,16 +35,15 @@ export class ApiService {
 		if (authToken) {
 			headers.append('Authorization', authToken);
 		}
-
 		return headers;
 	}
 
 	/**
- * HTTP Get
- * @param res
- * @returns {Observable<R>}
- */
-	httpGet(endpoint: string) {
+	* HTTP Get
+	* @param res
+	* @returns {Observable<R>}
+	*/
+	httpGet(endpoint: string) { 
 		// Add timestamp to avoid cache
 		if (endpoint.indexOf('?') >= 0) {
 			endpoint += '&'
@@ -63,29 +64,29 @@ export class ApiService {
 	 * @param res
 	 * @returns {Observable<R>}
 	 */
-	httpGetCountriesList(endpoint: string) {
-		// Add timestamp to avoid cache
-		if (endpoint.indexOf('?') >= 0) {
-			endpoint += '&'
-		}
-		else {
-			endpoint += '?'
-		}
-		const timestamp = + new Date();
-		// endpoint += '_t=' + timestamp;
+	// httpGetCountriesList(endpoint: string) {
+	// 	// Add timestamp to avoid cache
+	// 	if (endpoint.indexOf('?') >= 0) {
+	// 		endpoint += '&'
+	// 	}
+	// 	else {
+	// 		endpoint += '?'
+	// 	}
+	// 	const timestamp = + new Date();
+	// 	// endpoint += '_t=' + timestamp;
 
-		return this.http.get(this.baseUrl + endpoint) //, { headers: this.getHttpHeaders() })
-			.pipe(map((response: any) => response.json()))
-			.pipe(catchError(this.handleError));
-	}
+	// 	return this.http.get(this.baseUrl + endpoint) //, { headers: this.getHttpHeaders() })
+	// 		.pipe(map((response: any) => response.json()))
+	// 		.pipe(catchError(this.handleError));
+	// }
 
-/**
- * HTTP Post
- * @param endpoint
- * @param dataPost
- * @returns {Observable<R>}
- */
-	httpPostPlayer(endpoint, dataPost, uploadFile = false): Observable<any> {
+	/**
+	 * HTTP Post
+	 * @param endpoint
+	 * @param dataPost
+	 * @returns {Observable<R>}
+	 */
+	httpPost(endpoint, dataPost, uploadFile = false): Observable<any> {
 		const subject = new Subject<any>();
 		let json = null;
 		if (dataPost) {
@@ -168,7 +169,6 @@ export class ApiService {
 			);
 		return subject.asObservable()
 	}
-
 
 	/**
 	 * Handle error

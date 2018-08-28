@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { HelperService } from './helper.service';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
+import { Player } from '../models/player.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +11,18 @@ export class PlayersService {
 
   constructor(private apiService: ApiService) { }
 
-  public getPlayers() {
+  /**
+   * Get players from API
+   * @returns {Observable}
+   */
+  public getPlayers(): Observable<Player[]> {
     const subject = new Subject<any>();
     this.apiService.httpGet('/players')
+    //Create a subscribe because you can manipulate the data, otherwise its not necessary to subscribe
       .subscribe(
         (data: any) => {
-          // console.log(JSON.stringify(data))
-          const players = HelperService.fromObjectToArray(data);
-          subject.next(players);
+          // const players = HelperService.fromObjectToArray(data);
+          subject.next(data);
         },
         (err: any) => {
           subject.error(err);
@@ -26,7 +31,12 @@ export class PlayersService {
     return subject.asObservable();
   }
 
-  public getPlayer(id) {
+  /**
+   * Get one player from API by an id 
+   * @param id id from player
+   * @returns {Observable<Player>}
+   */
+  public getPlayer(id): Observable<Player> { 
     const subject = new Subject<any>();
     this.apiService.httpGet(`/players/${id}`)
       .subscribe(
@@ -40,19 +50,31 @@ export class PlayersService {
     return subject.asObservable();
   }
 
-  public putPlayer(id, player) {
+  /**
+   * Edit player info
+   * @param id id from player
+   * @param player 
+   * @returns {Observable<Player>}
+   */
+  public putPlayer(id, player):Observable<Player> {
     return this.apiService.httpPut('/players/' + id, player);
   }
 
   /**
   * Create a new player
   * @param player 
+  * @returns {Observable<Player>}
   */ 
-  public postPlayer(player) {
-    return this.apiService.httpPostPlayer('/players', player);
+  public postPlayer(player):Observable<Player> {
+    return this.apiService.httpPost('/players', player);
   }
 
-  public deletePlayer(id){
+  /**
+   * Delete a specific player
+   * @param id id from player
+   * @returns {Observable<Player>}
+   */
+  public deletePlayer(id):Observable<Player> {
     return this.apiService.httpDelete(`/players/${id}`);
   }
 }

@@ -20,9 +20,9 @@ const appRoutes: Routes = [
   { path: '', component: RowComponent },
   { path: 'home', component: RowComponent },
   { path: 'user/detail/:id', component: DetailPlayerComponent },
-  { path: 'user/create', component: FormPlayerComponent/*, canActivate: [MyGuard]*/ },
-  { path: 'user/edit/:id', component: FormPlayerComponent/*, canActivate: [MyGuard]*/ },
-  { path: 'user/detail/:id', component: DetailPlayerComponent/*, canActivate: [MyGuard]*/ }
+  { path: 'user/create', component: FormPlayerComponent },
+  { path: 'user/edit/:id', component: FormPlayerComponent },
+  { path: 'user/detail/:id', component: DetailPlayerComponent }
 ];
 
 @NgModule({

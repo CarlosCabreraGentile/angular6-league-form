@@ -53,10 +53,7 @@ export class RowComponent implements OnInit {
 
   editPlayer(id: number, event) {
     event.stopPropagation();
-    console.log('Edit');
-    
-    this.router.navigate([`user/detail/${id}`]);
-    // this.playersService.editPlayerValues(this.id, this.players[this.id]);
+    this.router.navigate([`user/edit/${id}`]);
   }
 
   deletePlayerSelected(id: number) {
@@ -67,18 +64,19 @@ export class RowComponent implements OnInit {
       })
     },
     (err: any) => {
-      console.log(err);
+      console.error(err);
     })
   }
 
-  openVerticallyCentered(content, player) {
+  openVerticallyCentered(content, player, event) {
+    event.stopPropagation();
     this.selectedPlayer = player;
     this.modalService.open(content, { centered: true });
   }
 
   detailPlayer(id: number){
     console.log(id);
-    this.router.navigate(['user/detail/:id']);
+    this.router.navigate([`user/detail/${id}`]);
   }
 
 }

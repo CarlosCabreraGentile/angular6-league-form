@@ -13,12 +13,12 @@ import { Subject, Observable } from 'rxjs';
 @Component({
   selector: 'app-form-player',
   templateUrl: './form-player.component.html',
-  styleUrls: ['./form-player.component.css']
+  styleUrls: ['./form-player.component.css'] 
 })
 export class FormPlayerComponent implements OnInit {
   countries: Country[] = [];
   player: any = {};
-  form: FormGroup;
+  form: FormGroup; 
   object: FormGroup = null;
   id: number = null;
 
@@ -32,7 +32,6 @@ export class FormPlayerComponent implements OnInit {
         .subscribe(
           (data: Player) => {
             this.player = data;
-            console.dir(this.player.country);
             this.initForm();
           },
           (err: any) => {
@@ -40,7 +39,6 @@ export class FormPlayerComponent implements OnInit {
           }
         )
     } else {
-      console.log('create');
       this.initForm();
     }
 
@@ -48,10 +46,9 @@ export class FormPlayerComponent implements OnInit {
       .subscribe(
         (data: Country[]) => {
           this.countries = data;
-          // console.log(this.countries);
         },
         (err: any) => {
-          console.log(err);
+          console.error(err);
         }
       )
   }
@@ -88,7 +85,6 @@ export class FormPlayerComponent implements OnInit {
           this.router.navigate(['home']);
         });
     }
-
     else {
       this.editPlayer()
         .subscribe(() => {

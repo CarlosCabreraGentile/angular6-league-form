@@ -1,6 +1,11 @@
 export class HelperService {
 
-    static fromObjectToArray(object: any) {
+    /**
+     * Add new parameter to object
+     * @param object 
+     * @returns {Object}
+     */
+    static fromObjectToArray(object: any): Object {
         if (!object){
             return [];
         }

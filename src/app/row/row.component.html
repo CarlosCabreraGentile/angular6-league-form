@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col mb-5 bg-white rounded border">
-      <h2 class="mt-4 font-weight-bold">Team Details</h2>
+      <h3 class="mt-4 font-weight-bold">Team Details</h3>
       <div class="col-3 offset-9 add-right">
         <button type="button" class="btn btn-warning" (click)="createPlayer()">Add player</button>
       </div>
@@ -23,8 +23,8 @@
             <td>{{ player.name }}</td>
             <td>{{ player.value }}</td>
             <td>{{ player.country | countryName | async }}</td>
-            <td><button type="button" class="btn btn-warning" (click)="editPlayer(player.id, $event)">Edit</button></td>
-            <td><button type="button" class="btn btn-delete" (click)="openVerticallyCentered(content, player)"><i class="fa fa-trash-alt"></i></button></td>
+            <td><button type="button" class="btn btn-edit" (click)="editPlayer(player.id, $event)"><i class="far fa-edit"></i></button></td>
+            <td><button type="button" class="btn btn-delete" (click)="openVerticallyCentered(content, player, $event)"><i class="fa fa-trash-alt"></i></button></td>
           </tr>
         </tbody>
       </table>

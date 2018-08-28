@@ -1,6 +1,6 @@
 import { OnInit } from '@angular/core';
 import { Component, ViewEncapsulation } from '@angular/core';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-modal-options',
@@ -19,6 +19,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
   }
 `]
 })
+
 export class ModalOptionsComponent implements OnInit {
   closeResult: string;
 

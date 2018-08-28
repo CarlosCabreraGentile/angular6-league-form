@@ -14,29 +14,20 @@ export class DetailPlayerComponent implements OnInit {
   player: any = {};
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private playersService: PlayersService, private route: ActivatedRoute) { 
+  constructor(private fb: FormBuilder, private playersService: PlayersService, private route: ActivatedRoute) {
     this.id = this.route.snapshot.params['id'];
   }
 
   ngOnInit() {
     this.playersService.getPlayer(this.id)
-  .subscribe(
-    (data: Player) => {
-      this.player = data;
-      this.initForm();
-    },
-    (err: any) => {
-      console.error(err);
-    }
-  )
+      .subscribe(
+        (data: Player) => {
+          this.player = data;
+        },
+        (err: any) => {
+          console.error(err);
+        }
+      )
   }
-
-  initForm() {
-    this.form = this.fb.group({
-      name: [this.player.name],
-      value: [this.player.value],
-      country: [this.player.country],
-    })
-  }  
 
 }

@@ -17,8 +17,9 @@ export class ApiService {
 	/**
 	 * Get headers
 	 * @param uploadFile 
+	 * @returns {Headers}
 	 */
-	getHttpHeaders(uploadFile: boolean = false) {
+	getHttpHeaders(uploadFile: boolean = false):Headers {
 		const headers = new Headers();
 
 		if (!uploadFile) {
@@ -54,31 +55,10 @@ export class ApiService {
 		const timestamp = + new Date();
 		// endpoint += '_t=' + timestamp;
 
-		return this.http.get(this.baseUrl + endpoint) //, { headers: this.getHttpHeaders() })
+		return this.http.get(this.baseUrl + endpoint, { headers: this.getHttpHeaders() }) //, { headers: this.getHttpHeaders() })
 			.pipe(map((response: any) => response.json()))
 			.pipe(catchError(this.handleError));
 	}
-
-    /**
-	 * HTTP Get
-	 * @param res
-	 * @returns {Observable<R>}
-	 */
-	// httpGetCountriesList(endpoint: string) {
-	// 	// Add timestamp to avoid cache
-	// 	if (endpoint.indexOf('?') >= 0) {
-	// 		endpoint += '&'
-	// 	}
-	// 	else {
-	// 		endpoint += '?'
-	// 	}
-	// 	const timestamp = + new Date();
-	// 	// endpoint += '_t=' + timestamp;
-
-	// 	return this.http.get(this.baseUrl + endpoint) //, { headers: this.getHttpHeaders() })
-	// 		.pipe(map((response: any) => response.json()))
-	// 		.pipe(catchError(this.handleError));
-	// }
 
 	/**
 	 * HTTP Post
@@ -118,7 +98,7 @@ export class ApiService {
 
 
 		// let options = new RequestOptions({ headers: headers });
-		this.http.post(this.baseUrl + res, formData) //, { headers: this.getHttpHeaders(true) })
+		this.http.post(this.baseUrl + res, formData, { headers: this.getHttpHeaders() }) //, { headers: this.getHttpHeaders(true) })
 			.pipe(map((response: any) => response.json()))
 			.pipe(catchError(this.handleError))
 			.subscribe(
@@ -159,7 +139,7 @@ export class ApiService {
 	 */
 	httpDelete(endpoint, mockapi: boolean = false): Observable<any> {
 		const subject = new Subject<any>();
-		this.http.delete(this.baseUrl + endpoint) //, { headers: this.getHttpHeaders() })
+		this.http.delete(this.baseUrl + endpoint,{ headers: this.getHttpHeaders() }) //, { headers: this.getHttpHeaders() })
 			.pipe(map((response: any) => response.json()))
 			.pipe(catchError(this.handleError))
 			.subscribe(

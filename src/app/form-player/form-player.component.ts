@@ -15,6 +15,7 @@ import { Subject, Observable } from 'rxjs';
   templateUrl: './form-player.component.html',
   styleUrls: ['./form-player.component.css'] 
 })
+
 export class FormPlayerComponent implements OnInit {
   countries: Country[] = [];
   player: any = {};
@@ -22,11 +23,13 @@ export class FormPlayerComponent implements OnInit {
   object: FormGroup = null;
   id: number = null;
 
-  constructor(private fb: FormBuilder, private countriesService: CountriesService, private playersService: PlayersService, private route: ActivatedRoute, private router: Router) {
+  constructor(private fb: FormBuilder, private countriesService: CountriesService, 
+    private playersService: PlayersService, private route: ActivatedRoute, private router: Router) {
     this.id = this.route.snapshot.params['id'];
   }
 
   ngOnInit() {
+    //If there is an id, get specific player
     if (this.id) {
       this.playersService.getPlayer(this.id)
         .subscribe(
@@ -38,10 +41,13 @@ export class FormPlayerComponent implements OnInit {
             console.error(err);
           }
         )
-    } else {
+    } 
+    //If not, then initialize an empty form
+    else {
       this.initForm();
     }
 
+    //Get the list of contries
     this.countriesService.getCountries()
       .subscribe(
         (data: Country[]) => {
@@ -53,7 +59,11 @@ export class FormPlayerComponent implements OnInit {
       )
   }
 
-  initForm() {
+  /**
+   * Function that initialize the form
+   * @returns {void}
+   */
+  initForm(): void {
     this.form = this.fb.group({
       name: [this.player.name || '', Validators.compose([
         Validators.required,
@@ -71,13 +81,11 @@ export class FormPlayerComponent implements OnInit {
   }
 
   /**
-   * Send the request to players.service
-   * @param {number} number The player number
+   * Submit the form with player info
    * @returns {void}
-   * @author asdsad 
    */
   onSave(): void {
-    // Si estas creando un usuario nuevo
+    // If there is not an id, create a new player
     if (!this.id) {
       this.createPlayer()
         .subscribe(() => {
@@ -85,6 +93,7 @@ export class FormPlayerComponent implements OnInit {
           this.router.navigate(['home']);
         });
     }
+    //If a there is an id, edit player
     else {
       this.editPlayer()
         .subscribe(() => {
@@ -96,7 +105,6 @@ export class FormPlayerComponent implements OnInit {
 
   /**
    * Create a player
-   * //params
    * @returns {Observable<void>}
    */
   private createPlayer(): Observable<void> {

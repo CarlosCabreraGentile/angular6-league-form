@@ -24,6 +24,9 @@ export class CountriesService {
         },
         (err: any) => {
           subject.error(err);
+        },
+        () => {
+          subject.complete();
         }
       )
     return subject.asObservable();

@@ -1,6 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { Subject, Observable } from 'rxjs';
+import { Country } from '../models/country.interface';
 
 @Pipe({
   name: 'countryName'
@@ -9,39 +10,29 @@ export class CountryNamePipe implements PipeTransform {
 
   constructor(private apiService: ApiService) { }
 
-  transform(id: number): Observable<string> {
-    const subject = new Subject<any>();
-    this.getCountries()
-      .subscribe(
-        (data: any) => {
-          // console.log(data);
-           const country = data.filter((country) =>{
-            return country.id == id;
-          })
-          subject.next(country[0].name);
-        },
-        (err: any) => {
-          subject.error(err);
-        },
-        () => {
-          subject.complete();
-        }
-      )
-    return subject.asObservable();
+  /**
+   * Function that transform an id to string
+   * @param id from country
+   * @returns {string}
+   */
+  transform(id: number): string {
+    const countries = this.getCountries();
+    const country = countries.filter((country) => {
+      return country.id == id;
+    })
+    if (country.length) {
+      return country[0].name;
+    } else {
+      return String(id);
+    }
   }
 
-  public getCountries() {
-    const subject = new Subject<any>();
-    this.apiService.httpGet('/countries')
-      .subscribe(
-        (data: any) => {
-          subject.next(data);
-        },
-        (err: any) => {
-          subject.error(err);
-        }
-      )
-    return subject.asObservable();
+  /**
+   * Get list of countries from API
+   * @returns {Array<Country>}
+   */
+  public getCountries(): Array<Country> {
+    return JSON.parse(localStorage.getItem('countries'));
   }
 
 }

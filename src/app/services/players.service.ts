@@ -26,7 +26,11 @@ export class PlayersService {
         },
         (err: any) => {
           subject.error(err);
+        },
+        () => {
+          subject.complete();
         }
+
       )
     return subject.asObservable();
   }

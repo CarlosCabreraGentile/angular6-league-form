@@ -22,7 +22,7 @@
             <td>{{ player.id }}</td>
             <td>{{ player.name }}</td>
             <td>{{ player.value }}</td>
-            <td>{{ player.country | countryName | async }}</td>
+            <td>{{ player.country | countryName }}</td>
             <td><button type="button" class="btn btn-edit" (click)="editPlayer(player.id, $event)"><i class="far fa-edit"></i></button></td>
             <td><button type="button" class="btn btn-delete" (click)="openVerticallyCentered(content, player, $event)"><i class="fa fa-trash-alt"></i></button></td>
           </tr>

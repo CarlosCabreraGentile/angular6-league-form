@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+// Routing module
+import { AppRoutingModule } from './app.routes';
 
 
 import { AppComponent } from './app.component';
@@ -15,15 +17,9 @@ import { DetailPlayerComponent } from './detail-player/detail-player.component';
 import { FormPlayerComponent } from './form-player/form-player.component'; 
 import { ModalOptionsComponent } from './modal-options/modal-options.component';
 import { CountryNamePipe } from './pipes/country-name.pipe';
+import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 
-const appRoutes: Routes = [
-  { path: '', component: RowComponent },
-  { path: 'home', component: RowComponent },
-  { path: 'user/detail/:id', component: DetailPlayerComponent },
-  { path: 'user/create', component: FormPlayerComponent },
-  { path: 'user/edit/:id', component: FormPlayerComponent },
-  { path: 'user/detail/:id', component: DetailPlayerComponent }
-];
+
 
 @NgModule({
   declarations: [
@@ -32,6 +28,7 @@ const appRoutes: Routes = [
     DetailPlayerComponent,
     FormPlayerComponent,
     ModalOptionsComponent,
+    MainLayoutComponent,
     CountryNamePipe
   ],
   imports: [
@@ -40,7 +37,7 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    RouterModule.forRoot(appRoutes)
+    AppRoutingModule
   ],
   providers: [
     ApiService,

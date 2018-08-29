@@ -18,6 +18,7 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 
 // Routing module
 import { AppRoutingModule } from './app.routes';
+import { BreadcrumbComponent } from './breadcrumbs/breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { AppRoutingModule } from './app.routes';
     FormPlayerComponent,
     ModalOptionsComponent,
     CountryNamePipe,
-    MainLayoutComponent
+    MainLayoutComponent,
+    BreadcrumbComponent
   ],
   imports: [
     BrowserModule,

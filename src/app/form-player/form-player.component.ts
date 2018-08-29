@@ -13,23 +13,23 @@ import { Subject, Observable } from 'rxjs';
 @Component({
   selector: 'app-form-player',
   templateUrl: './form-player.component.html',
-  styleUrls: ['./form-player.component.css'] 
+  styleUrls: ['./form-player.component.css']
 })
 
 export class FormPlayerComponent implements OnInit {
   countries: Country[] = [];
   player: any = {};
-  form: FormGroup; 
+  form: FormGroup;
   object: FormGroup = null;
   id: number = null;
 
-  constructor(private fb: FormBuilder, private countriesService: CountriesService, 
+  constructor(private fb: FormBuilder, private countriesService: CountriesService,
     private playersService: PlayersService, private route: ActivatedRoute, private router: Router) {
     this.id = this.route.snapshot.params['id'];
   }
 
   ngOnInit() {
-    //If there is an id, get specific player
+    // If there is an id, get specific player
     if (this.id) {
       this.playersService.getPlayer(this.id)
         .subscribe(
@@ -40,14 +40,13 @@ export class FormPlayerComponent implements OnInit {
           (err: any) => {
             console.error(err);
           }
-        )
-    } 
-    //If not, then initialize an empty form
-    else {
+        );
+    } else {
+      // If not, then initialize an empty form
       this.initForm();
     }
 
-    //Get the list of contries
+    // Get the list of contries
     this.countriesService.getCountries()
       .subscribe(
         (data: Country[]) => {
@@ -77,7 +76,7 @@ export class FormPlayerComponent implements OnInit {
       country: [this.player.country || '', Validators.compose([
         Validators.required
       ])],
-    })
+    });
   }
 
   /**
@@ -92,9 +91,8 @@ export class FormPlayerComponent implements OnInit {
           this.form.reset();
           this.router.navigate(['home']);
         });
-    }
-    //If a there is an id, edit player
-    else {
+    } else {
+      // If a there is an id, edit player
       this.editPlayer()
         .subscribe(() => {
           this.form.reset();

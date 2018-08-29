@@ -12,11 +12,13 @@ import { filter } from 'rxjs/operators';
 })
 
 export class BreadcrumbComponent implements OnInit {
-  breadcrumb = {};
   breadcrumbs$ = this.router.events.pipe(
     filter(event => event instanceof NavigationEnd))
     .subscribe(() => {
+      console.log("enter");
+      
       this.buildBreadCrumb(this.activatedRoute.root);
+      console.log("ENTER");
     })
   // Build your breadcrumb starting with the root route of your current activated route
   constructor(private activatedRoute: ActivatedRoute,
@@ -24,13 +26,14 @@ export class BreadcrumbComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("ngOnInit");
+    
   }
 
   buildBreadCrumb(route: ActivatedRoute, url: string = '', breadcrumbs: Array<BreadCrumb> = []): Array<BreadCrumb> {
     // If no routeConfig is avalailable we are on the root path
     const label = route.routeConfig ? route.routeConfig.data['breadcrumb'] : 'home';
     const path = route.routeConfig ? route.routeConfig.path : '';
-    console.log(path);
     // In the routeConfig the complete path is not available,
     // so we rebuild it each time
     const nextUrl = `${url}${path}/`;
@@ -39,7 +42,6 @@ export class BreadcrumbComponent implements OnInit {
       url: nextUrl
     };
     const newBreadcrumbs = [...breadcrumbs, breadcrumb];
-    console.log(breadcrumb);
     
     if (route.firstChild) {
       // If we are not on our current path yet,

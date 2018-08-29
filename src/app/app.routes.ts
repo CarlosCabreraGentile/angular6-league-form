@@ -14,12 +14,12 @@ export const routes: Routes = [
             {
                 path: '',
                 redirectTo: '/players',
-                pathMatch: 'full'
+                pathMatch: 'full',
             },
             {
                 path: 'home',
                 redirectTo: '/players',
-                pathMatch: 'full'
+                pathMatch: 'full',
             },
             {
                 path: 'players',
@@ -27,24 +27,15 @@ export const routes: Routes = [
             },
             {
                 path: 'user/detail/:id',
-                component: DetailPlayerComponent,
-                data: {
-                    breadcrumb: 'Detail'
-                }
+                component: DetailPlayerComponent
             },
             {
                 path: 'user/create',
-                component: FormPlayerComponent,
-                data: {
-                    breadcrumb: 'Create'
-                }
+                component: FormPlayerComponent
             },
             {
                 path: 'user/edit/:id',
-                component: FormPlayerComponent,
-                data: {
-                    breadcrumb: 'Edit'
-                }
+                component: FormPlayerComponent
             }
         ]
     },

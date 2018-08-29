@@ -4,7 +4,16 @@
       <h2 class="mt-4 font-weight-bold">Player Details</h2>
       <hr>
       <div class="mt-3">
-        <app-breadcrumb></app-breadcrumb>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/home" cursor="pointer">Home</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              Detail
+            </li>
+          </ol>
+        </nav>
       </div>
       <table *ngIf="player" class="table table-hover">
         <thead class="thead-light">

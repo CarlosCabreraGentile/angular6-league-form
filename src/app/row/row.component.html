@@ -18,7 +18,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let player of players" (click)="detailPlayer(player.id)">
+          <tr *ngFor="let player of players" (click)="detailPlayer(player)">
             <td>{{ player.id }}</td>
             <td>{{ player.name }}</td>
             <td>{{ player.value }}</td>

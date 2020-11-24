@@ -11,23 +11,22 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class DetailPlayerComponent implements OnInit {
   id: number = null;
-  player: any = {};
+  player: Player;
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private playersService: PlayersService, private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute) {
     this.id = this.route.snapshot.params['id'];
   }
 
   ngOnInit() {
-    this.playersService.getPlayer(this.id)
-      .subscribe(
-        (data: Player) => {
-          this.player = data;
-        },
-        (err: any) => {
-          console.error(err);
-        }
-      )
+    this.route.params.subscribe(
+      (data: Player) => {
+        this.player = data;
+      },
+      (err: any) => {
+              console.error(err);
+            }
+    );
   }
 
 }

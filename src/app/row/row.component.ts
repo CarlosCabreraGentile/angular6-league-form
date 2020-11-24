@@ -24,8 +24,12 @@ export class RowComponent implements OnInit {
   id: number;
   selectedPlayer: Player;
 
-  constructor(private playersService: PlayersService, private counstriesService: CountriesService, private router: Router, private modalService: NgbModal) {
-  }
+  constructor(
+    private playersService: PlayersService,
+    private counstriesService: CountriesService,
+    private router: Router,
+    private modalService: NgbModal
+    ) { }
 
   ngOnInit() {
     forkJoin(
@@ -52,7 +56,7 @@ export class RowComponent implements OnInit {
   /**
    * Edit a player
    * @param id player id
-   * @param event 
+   * @param event
    */
   editPlayer(id: number, event) {
     //This function prevent cascade clic function
@@ -62,12 +66,12 @@ export class RowComponent implements OnInit {
 
   /**
    * Delete a specific player
-   * @param id 
+   * @param id
    */
   deletePlayerSelected(id: number) {
     this.playersService.deletePlayer(id)
       .subscribe((data: Player) => {
-        this.players = this.players.filter((player) => { 
+        this.players = this.players.filter((player) => {
           return player.id !== data.id;
         })
       },
@@ -78,9 +82,9 @@ export class RowComponent implements OnInit {
 
   /**
    * Function that open a modal
-   * @param content 
-   * @param player 
-   * @param event 
+   * @param content
+   * @param player
+   * @param event
    */
   openVerticallyCentered(content, player, event) {
     //This function prevent cascade clic function
@@ -93,8 +97,8 @@ export class RowComponent implements OnInit {
    * Function show details from player
    * @param id id player
    */
-  detailPlayer(id: number) {
-    this.router.navigate([`user/detail/${id}`]);
+  detailPlayer(player: any) {
+    this.router.navigate([`user/detail`, player]);
   }
 
 }

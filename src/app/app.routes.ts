@@ -26,7 +26,7 @@ export const routes: Routes = [
                 component: RowComponent
             },
             {
-                path: 'user/detail/:id',
+                path: 'user/detail',
                 component: DetailPlayerComponent
             },
             {
